@@ -1,0 +1,159 @@
+/* Header */
+header {
+  max-width: 1280px;
+  padding: 0 40px;
+  margin: auto;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 img {
+  height: 18px;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav li a {
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  margin-right: 80px;
+}
+
+nav li:last-child a {
+  margin-right: 0;
+}
+
+header .util a {
+  color: var(--color-gr-600);
+  font-size: 12px;
+  line-height: 18px;
+  margin-right: 16px;
+}
+
+header .util a:last-child {
+  margin-right: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 40px;
+}
+
+.breadcrumbs {
+  border: 1px solid var(--color-gr-200);
+  border-left: none;
+  background: var(--color-gr-100);
+  height: 36px;
+}
+
+.breadcrumbs ul {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 40px;
+}
+
+.breadcrumbs li {
+  height: 100%;
+}
+
+.breadcrumbs a {
+  color: var(--color-gr-700);
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 10px;
+  border-left: 1px solid var(--color-gr-200);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snb-wrap {
+  width: 196px;
+}
+
+.snb-wrap h2 {
+  font-size: 20px;
+  padding: 15px 0 15px 15px;
+  border-bottom: 1px solid var(--color-gr-1000);
+}
+
+.snb-wrap li a {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 52px;
+  padding-left: 15px;
+  border-bottom: 1px solid var(--color-gr-400);
+  background: var(--color-gr-100);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.snb-wrap ol {
+  border-bottom: 1px solid var(--color-gr-400);
+}
+
+.snb-wrap ol li a {
+  color: var(--color-gr-700);
+  font-size: 14px;
+  background: none;
+  height: 42px;
+  border-bottom: none;
+  padding-left: 30px;
+  position: relative;
+}
+
+.snb-wrap ol li a::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+}
+
+.snb-wrap ol li a.on {
+  color: var(--color-bl-900);
+  font-weight: 700;
+}
+
+.snb-wrap ol li a.on::before {
+  background: var(--color-bl-900);
+}
+
+.mo {
+  display: none;
+}
+
+@media all and (max-width: 1280px) {
+  header,
+  .breadcrumbs ul {
+    padding: 0 20px;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  nav {
+    display: none;
+  }
+}
+
+@media all and (max-width: 900px) {
+  .breadcrumbs {
+    display: none;
+  }
+}

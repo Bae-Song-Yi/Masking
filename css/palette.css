@@ -1,0 +1,51 @@
+:root {
+  /* 그레이 스케일 */
+  --color-gr-1000: #252525;
+  --color-gr-900: #333;
+  --color-gr-800: #4e4e4e;
+  --color-gr-700: #6a6a6a;
+  --color-gr-600: #868686;
+  --color-gr-500: #a3a3a3;
+  --color-gr-400: #c1c1c1;
+  --color-gr-300: #d7d7d7;
+  --color-gr-250: #e2e2e2;
+  --color-gr-200: #eaeaea;
+  --color-gr-150: #f3f3f3;
+  --color-gr-100: #f9f9f9;
+
+  /* 오렌지 스케일 */
+  --color-or-1000: #2b0d00;
+  --color-or-900: #4d1800;
+  --color-or-800: #962d00;
+  --color-or-700: #cb3a0d;
+  --color-or-600: #f44e05;
+  --color-or-500: #f76e33;
+  --color-or-400: #f89569;
+  --color-or-300: #fbb89b;
+  --color-or-200: #f9ded3;
+  --color-or-150: #fbe8e0;
+  --color-or-100: #fcf2ef;
+
+  /* 블루 스케일 */
+  --color-bl-1000: #071839;
+  --color-bl-900: #101b4d;
+  --color-bl-800: #0f1f6a;
+  --color-bl-700: #1d2e82;
+  --color-bl-600: #344699;
+  --color-bl-500: #5567b8;
+  --color-bl-400: #7f8dcf;
+  --color-bl-300: #afb7e1;
+  --color-bl-200: #dadef5;
+  --color-bl-150: #e4e8f9;
+  --color-bl-100: #f1f2fa;
+
+  /* 시스템 컬러 */
+  --color-pu: #580d9c;
+  --color-bl: #0000ee;
+  --color-gn: #31a427;
+  --color-rd: #e51b27;
+
+  /* 블랙&화이트 */
+  --color-black: #000;
+  --color-white: #fff;
+}
