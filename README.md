@@ -37,12 +37,6 @@
 ### 1. 직관적인 마스킹 UI/UX
 - 드래그 방식으로 마스킹 영역을 지정하여 사용자 편의성 극대화
 - 실시간 마스킹 미리보기로 즉각적인 피드백 제공
-<br/><br/>
-
-## 📊 성과
-- 직관적인 UI로 사용자 진입장벽 최소화
-- PC/모바일 크로스 브라우징 지원
-- 안정적인 마스킹 기능 구현
 ```javascript
   maskingWrap.addEventListener("mousedown", function (e) {
    isDrawing = true;
@@ -52,6 +46,24 @@
    // ... 마스킹 영역 생성 로직
 });
 ```
+- ### 2. 반응형 웹 구현
+- PC와 모바일 환경 모두 최적화된 UI 제공
+- 터치 이벤트 대응으로 모바일에서도 자연스러운 사용성 확보
+```javascript
+// 모바일 터치 이벤트 처리
+maskingWrap.addEventListener("touchstart", function (e) {
+if (e.touches.length === 1) {
+// ... 터치 기반 마스킹 로직
+}
+});
+```
+<br/><br/>
+
+## 📊 성과
+- 직관적인 UI로 사용자 진입장벽 최소화
+- PC/모바일 크로스 브라우징 지원
+- 안정적인 마스킹 기능 구현
+
 <br/><br/>
 
 
