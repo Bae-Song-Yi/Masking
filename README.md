@@ -43,7 +43,9 @@
 ## 📱 UI/UX
 
 ### PC UI
-![image](https://github.com/user-attachments/assets/0a791a52-5c70-44fe-8f2d-ca7f5eaa52fc)
+![image](https://github.com/user-attachments/assets/b8b949a7-34aa-415a-ad2d-7a7b1eff35f9)
+
+
 
 
 개인정보 마스킹 URL : https://bae-song-yi.github.io/Masking/masking
