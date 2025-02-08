@@ -43,13 +43,17 @@
 - 직관적인 UI로 사용자 진입장벽 최소화
 - PC/모바일 크로스 브라우징 지원
 - 안정적인 마스킹 기능 구현
->maskingWrap.addEventListener("mousedown", function (e) {
+```markdown
+<script>
+  maskingWrap.addEventListener("mousedown", function (e) {
    isDrawing = true;
    const rect = this.getBoundingClientRect();
    prevX = ((e.clientX - rect.left) / this.offsetWidth) 100;
    prevY = ((e.clientY - rect.top) / this.offsetHeight) 100;
    // ... 마스킹 영역 생성 로직
    });
+</script>
+
 
 ## 📱 UI/UX
 ![PC Flow](https://github.com/user-attachments/assets/5c38124b-dac5-4f19-946c-538847ba13cc)
