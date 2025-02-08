@@ -51,7 +51,7 @@
    prevY = ((e.clientY - rect.top) / this.offsetHeight) 100;
    // ... 마스킹 영역 생성 로직
 });
-
+```
 <br/><br/>
 
 
