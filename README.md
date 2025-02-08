@@ -33,12 +33,23 @@
    - 디바이스별 UI/UX 최적화
 <br/><br/>
 
-## 사용 방법
-1. '파일선택' 버튼을 클릭하여 신분증 이미지를 업로드합니다.
-2. 마스킹이 필요한 영역을 마우스나 터치로 드래그하여 선택합니다.
-3. 필요한 경우 '초기화' 버튼을 눌러 마스킹을 다시 시작할 수 있습니다.
-4. 마스킹이 완료되면 '제출하기' 버튼이 활성화됩니다.
+## 💡 문제 해결 및 핵심 기능
+### 1. 직관적인 마스킹 UI/UX
+- 드래그 방식으로 마스킹 영역을 지정하여 사용자 편의성 극대화
+- 실시간 마스킹 미리보기로 즉각적인 피드백 제공
 <br/><br/>
+
+## 📊 성과
+- 직관적인 UI로 사용자 진입장벽 최소화
+- PC/모바일 크로스 브라우징 지원
+- 안정적인 마스킹 기능 구현
+>maskingWrap.addEventListener("mousedown", function (e) {
+   isDrawing = true;
+   const rect = this.getBoundingClientRect();
+   prevX = ((e.clientX - rect.left) / this.offsetWidth) 100;
+   prevY = ((e.clientY - rect.top) / this.offsetHeight) 100;
+   // ... 마스킹 영역 생성 로직
+   });
 
 ## 📱 UI/UX
 ![PC Flow](https://github.com/user-attachments/assets/5c38124b-dac5-4f19-946c-538847ba13cc)
