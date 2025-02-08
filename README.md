@@ -41,8 +41,6 @@
 <br/><br/>
 
 ## 📱 UI/UX
-
-### PC UI
 ![PC Flow](https://github.com/user-attachments/assets/5c38124b-dac5-4f19-946c-538847ba13cc)
 
 
