@@ -23,22 +23,38 @@
             <div class="masking-wrap"></div>
           </div>
           <!-- //File Attachment -->
-
           <div class="masing-info">
             <h3>
               신분증 사본 제출하기 <a href="#"><img src="img/icon_close_bk_2px.png" /></a>
             </h3>
-            <div class="sample-img"><img src="img/example.jpg" /></div>
-            <p class="masking-noti"><img src="img/icon_alert_orange500.png" /><i>이름, 생년월일, 사진, 발급일</i>을 제외한 모든 정보는 가려주세요.</p>
+            <div class="pc">
+              <div class="sample"><img src="img/example.jpg" /></div>
 
-            <ul class="upload-noti">
-              <li>1. 파일은 jPG, JPEG, PNG 만 선택 가능합니다.</li>
-              <li>2. 파일 선택 시 미리보기가 가능하고, 드래그하여 이미지 위에 마스킹 영역을 지정할 수 있습니다. (펜 모양 아이콘을 눌러 비활성화 가능)</li>
-              <li>3. 만약, 실수했다면 초기화 하여 마스킹을 모두 지울 수 있습니다.</li>
-            </ul>
+              <p class="masking-noti"><img src="img/icon_alert_orange500.png" /><i>이름, 생년월일, 사진, 발급일</i>을 제외한 모든 정보는 가려주세요.</p>
+
+              <ul class="upload-noti">
+                <li>1. 파일은 jPG, JPEG, PNG 만 선택 가능합니다.</li>
+                <li>2. 파일 선택 시 미리보기가 가능하고, 드래그하여 이미지 위에 마스킹 영역을 지정할 수 있습니다. (펜 모양 아이콘을 눌러 비활성화 가능)</li>
+                <li>3. 만약, 실수했다면 초기화 하여 마스킹을 모두 지울 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="mo">
+              <p class="masking-noti"><img src="img/icon_alert_orange500.png" /><i>이름, 생년월일, 사진, 발급일</i>을 제외한 모든 정보는 가려주세요.</p>
+
+              <div class="masking-wrap">
+                <div class="sample"><img src="img/example.jpg" class="sample-img" /></div>
+                <ul class="upload-noti">
+                  <li>1. 파일은 jPG, JPEG, PNG 만 선택 가능합니다.</li>
+                  <li>2. 파일 선택 시 미리보기가 가능하고, 드래그하여 이미지 위에 마스킹 영역을 지정할 수 있습니다. (펜 모양 아이콘을 눌러 비활성화 가능)</li>
+                  <li>3. 만약, 실수했다면 초기화 하여 마스킹을 모두 지울 수 있습니다.</li>
+                </ul>
+              </div>
+            </div>
 
             <div class="buttons-wrap">
               <div class="masking-btn-wrap">
+                <a href="#" class="mo sample-btn on">샘플</a>
                 <a href="#" class="file-select-btn">파일선택<input type="file" class="hidden-input" /></a>
                 <a href="#" class="reset-masking-btn">초기화</a>
                 <a href="#" class="masking-btn">마스킹</a>
@@ -52,26 +68,34 @@
   </body>
   <script>
     // 파일 읽기 함수
+
     function readURL(obj) {
       const reader = new FileReader();
       if (!obj.files.length) return;
 
       reader.readAsDataURL(obj.files[0]);
       reader.onload = function (e) {
-        document.querySelector(".masking-wrap img")?.remove();
+        const containers = document.querySelectorAll(".masking-wrap");
 
-        const img = document.createElement("img");
-        img.src = e.target.result;
+        containers.forEach((container) => {
+          container.querySelector("img:not(.sample-img)")?.remove();
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          container.appendChild(img);
+          container.style.display = "block";
+          document.querySelector(".mo .upload-noti")?.remove();
+          document.querySelector(".mo .sample").style.display = "none";
+        });
 
-        document.querySelector(".masking-wrap").appendChild(img);
-        document.querySelector(".masking-wrap").style.display = "block";
         document.querySelector(".upload-info").style.display = "none";
         document.querySelector(".masking-btn").classList.add("on");
-        document.querySelector(".highlighter")?.remove();
+        document.querySelectorAll(".highlighter").forEach((el) => el.remove());
+        document.querySelector(".mo .sample").style.display = "none";
+        document.querySelector(".sample-btn").classList.remove("on");
       };
     }
 
-    const maskingWrap = document.querySelector(".masking-wrap");
+    const maskingWrap = document.querySelectorAll(".masking-wrap");
     const fileInputs = document.querySelectorAll(".hidden-input");
     const resetBtn = document.querySelector(".reset-masking-btn");
     const maskingBtn = document.querySelector(".masking-btn");
@@ -88,35 +112,86 @@
     });
 
     // 마스킹 그리기 이벤트
-    maskingWrap.addEventListener("mousedown", function (e) {
-      isDrawing = true;
-      const rect = this.getBoundingClientRect();
-      prevX = ((e.clientX - rect.left) / this.offsetWidth) * 100;
-      prevY = ((e.clientY - rect.top) / this.offsetHeight) * 100;
+    maskingWrap.forEach(function (container) {
+      container.addEventListener("mousedown", function (e) {
+        isDrawing = true;
+        const rect = this.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-      const highlighter = document.createElement("div");
-      highlighter.className = "highlighter";
-      highlighter.style.left = prevX + "%";
-      highlighter.style.top = prevY + "%";
-      this.appendChild(highlighter);
-    });
+        prevX = ((e.pageX - rect.left - scrollLeft) / this.offsetWidth) * 100;
+        prevY = ((e.pageY - rect.top - scrollTop) / this.offsetHeight) * 100;
 
-    maskingWrap.addEventListener("mousemove", function (e) {
-      if (!isDrawing) return;
+        const highlighter = document.createElement("div");
+        highlighter.className = "highlighter";
+        highlighter.style.left = prevX + "%";
+        highlighter.style.top = prevY + "%";
+        this.appendChild(highlighter);
+      });
 
-      const rect = this.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / this.offsetWidth) * 100;
-      const y = ((e.clientY - rect.top) / this.offsetHeight) * 100;
+      container.addEventListener("mousemove", function (e) {
+        if (!isDrawing) return;
 
-      const highlighter = this.querySelector(".highlighter:last-child");
-      if (highlighter) {
-        highlighter.style.width = x - prevX + "%";
-        highlighter.style.height = y - prevY + "%";
-      }
-    });
+        const rect = this.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-    maskingWrap.addEventListener("mouseup", function () {
-      isDrawing = false;
+        const x = ((e.pageX - rect.left - scrollLeft) / this.offsetWidth) * 100;
+        const y = ((e.pageY - rect.top - scrollTop) / this.offsetHeight) * 100;
+
+        const highlighter = this.querySelector(".highlighter:last-child");
+        if (highlighter) {
+          highlighter.style.width = x - prevX + "%";
+          highlighter.style.height = y - prevY + "%";
+
+          checkSubmitActive();
+        }
+      });
+
+      container.addEventListener("mouseup", function () {
+        isDrawing = false;
+      });
+
+      // 모바일 터치 이벤트
+      container.addEventListener("touchstart", function (e) {
+        if (e.touches.length === 1) {
+          isDrawing = true;
+          const touch = e.touches[0];
+          const rect = this.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          prevX = ((touch.clientX - rect.left) / this.offsetWidth) * 100;
+          prevY = ((touch.clientY + scrollTop - rect.top) / this.offsetHeight) * 100;
+
+          const highlighter = document.createElement("div");
+          highlighter.className = "highlighter";
+          highlighter.style.left = prevX + "%";
+          highlighter.style.top = prevY + "%";
+          this.appendChild(highlighter);
+        }
+      });
+
+      container.addEventListener("touchmove", function (e) {
+        if (!isDrawing || e.touches.length !== 1) return;
+        e.preventDefault();
+
+        const touch = e.touches[0];
+        const rect = this.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const x = ((touch.clientX - rect.left) / this.offsetWidth) * 100;
+        const y = ((touch.clientY + scrollTop - rect.top) / this.offsetHeight) * 100;
+
+        const highlighter = this.querySelector(".highlighter:last-child");
+        if (highlighter) {
+          highlighter.style.width = x - prevX + "%";
+          highlighter.style.height = y - prevY + "%";
+
+          checkSubmitActive();
+        }
+      });
+
+      container.addEventListener("touchend", function () {
+        isDrawing = false;
+      });
     });
 
     // 초기화 버튼
@@ -130,58 +205,39 @@
     function checkSubmitActive() {
       const hasHighlighter = document.querySelector(".highlighter");
       if (hasHighlighter) {
-        submitBtn.classList.add("active");
+        submitBtn.classList.add("on");
       } else {
-        submitBtn.classList.remove("active");
+        submitBtn.classList.remove("on");
       }
     }
 
-    // 모바일 터치 이벤트
-    maskingWrap.addEventListener("touchstart", function (e) {
-      if (e.touches.length === 1) {
-        isDrawing = true;
-        const touch = e.touches[0];
-        const rect = this.getBoundingClientRect();
-        prevX = ((touch.pageX - rect.left) / this.offsetWidth) * 100;
-        prevY = ((touch.pageY - rect.top) / this.offsetHeight) * 100;
+    document.querySelector(".mo .sample").addEventListener("click", function () {
+      this.style.display = "none";
+      document.querySelector(".sample-btn").classList.remove("on");
+      const uploadNoti = document.querySelector(".mo .upload-noti");
+      if (uploadNoti) uploadNoti.style.display = "block";
+    });
 
-        const highlighter = document.createElement("div");
-        highlighter.className = "highlighter";
-        highlighter.style.left = prevX + "%";
-        highlighter.style.top = prevY + "%";
-        this.appendChild(highlighter);
+    document.querySelector(".sample-btn").addEventListener("click", function () {
+      const maskingWrapImg = document.querySelector(".mo .masking-wrap > img");
+      const sampleElement = document.querySelector(".mo .sample");
+      const uploadNoti = document.querySelector(".mo .upload-noti");
+
+      this.classList.toggle("on");
+      console.log(this.classList.contains("on"));
+
+      if (!this.classList.contains("on")) {
+        sampleElement.style.display = "none";
+
+        if (maskingWrapImg) maskingWrapImg.style.display = "block";
+        if (uploadNoti) uploadNoti.style.display = "block";
+      } else {
+        sampleElement.style.display = "block";
+
+        if (maskingWrapImg) maskingWrapImg.style.display = "none";
+        if (uploadNoti) uploadNoti.style.display = "none";
       }
     });
-
-    maskingWrap.addEventListener("touchmove", function (e) {
-      if (!isDrawing || e.touches.length !== 1) return;
-      e.preventDefault();
-
-      const touch = e.touches[0];
-      const rect = this.getBoundingClientRect();
-      const x = ((touch.pageX - rect.left) / this.offsetWidth) * 100;
-      const y = ((touch.pageY - rect.top) / this.offsetHeight) * 100;
-
-      const highlighter = this.querySelector(".highlighter:last-child");
-      if (highlighter) {
-        highlighter.style.width = x - prevX + "%";
-        highlighter.style.height = y - prevY + "%";
-      }
-    });
-
-    maskingWrap.addEventListener("touchend", function () {
-      isDrawing = false;
-      checkSubmitActive();
-    });
-
-    // 창 크기 변경 감지
-    function handleResize() {
-      const isMobile = window.innerWidth <= 820;
-      document.body.classList.toggle("mobile", isMobile);
-    }
-
-    window.addEventListener("resize", handleResize);
-    handleResize(); // 초기 실행
   </script>
 
   <!-- <script>
@@ -261,7 +317,7 @@
       }
 
       const maskingNoti = $(".masking .masking-noti");
-      const maskingSampleImg = $(".masking .upload-img .sample-img");
+      const maskingSampleImg = $(".masking .upload-img .sample");
       const maskingTit = $(".masking h5");
       let maskImg = "";
       const imgSrc = "img/gif/";
@@ -450,7 +506,7 @@
       });
 
       //마스킹 샘플 이미지 활성화
-      const sampleImg = upload.find(".sample-img");
+      const sampleImg = upload.find(".sample");
       const maskingImg = upload.find(" > img");
       const sampleBtn = maskingTool.find(".sample-btn");
 

@@ -136,7 +136,7 @@ header .util a:last-child {
 }
 
 .mo {
-  display: none;
+  display: none !important;
 }
 
 @media all and (max-width: 1280px) {
@@ -155,5 +155,15 @@ header .util a:last-child {
 @media all and (max-width: 900px) {
   .breadcrumbs {
     display: none;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .pc {
+    display: none !important;
+  }
+
+  .mo {
+    display: block !important;
   }
 }
